@@ -1,42 +1,55 @@
-🧠 Science of Learning Integration (SoL)
-TutorBase applies evidence-based cognitive science to personalize learning plans. It draws on foundational principles of memory and learning to generate and verify syllabi, lesson plans, and assessments using Science of Learning (Kosslyn, 2017; Larsen, 2018; Tabibian, 2019).
+## 🧠 Science of Learning Integration (SoL)
 
-✅ Core Learning Principles Embedded in AI Output
+**TutorBase** is an AI-powered tutor support system that personalizes syllabi, lesson plans, and assessments based on principles from the **Science of Learning**.  
+It draws from cognitive psychology to help tutors design effective learning experiences for 1-on-1 programming students.
 
-Principle	Implementation in TutorBase
-Spaced Repetition	Concepts and skills are revisited across time in the syllabus and lesson plans.
-Active Recall	Lessons include quiz prompts, retrieval questions, and generative exercises.
-Chunking	Topics are broken into digestible sub-units across weeks.
-Dual Coding	AI suggests visual explanations alongside text (e.g., diagrams, flowcharts).
-Retrieval-Based Learning	Lessons and assessments include self-test tasks, flashcards, and weekly reviews.
-🔍 Verification Pipeline Using RAG
-TutorBase uses a Retrieval-Augmented Generation (RAG) framework to ensure all outputs align with SoL best practices:
+---
 
-Document Embedding:
-We embed research-based documents (e.g., Kosslyn’s 16 learning principles, Tabibian’s spaced repetition model) into a vector database.
+### ✅ Core Learning Principles Used
 
-Contextual Prompting:
-When generating a syllabus, lesson, or assessment, the system retrieves relevant pedagogical strategies and best practices as prompt context.
+| Learning Principle        | Implementation in TutorBase                                                                 |
+|--------------------------|----------------------------------------------------------------------------------------------|
+| **Spaced Repetition**     | Concepts are revisited over time in lesson plans and assessments.                          |
+| **Active Recall**         | Quizzes, retrieval questions, and generative tasks are built into lesson flow.              |
+| **Chunking**              | AI breaks down topics into sub-skills and weekly themes.                                    |
+| **Dual Coding**           | Lessons incorporate both visual and verbal elements (e.g., diagrams with explanations).     |
+| **Retrieval-Based Learning** | Weekly lessons include flashcards, self-testing, and cumulative review tasks.            |
 
-Post-Generation Verification:
-After content generation, the system verifies outputs using rule-based and prompt-based checks:
+---
 
-Are key concepts revisited after delay? (spaced)
+### 🔍 RAG (Retrieval-Augmented Generation) for SoL Alignment
 
-Are quizzes or self-tests included? (recall)
+TutorBase uses a **Retrieval-Augmented Generation** pipeline to align every AI-generated syllabus or lesson with evidence-based learning science.
 
-Are lessons structured around sub-skills or themes? (chunking)
+#### 📥 1. Document Retrieval
+- Relevant cognitive science documents (e.g., Kosslyn’s learning principles) are stored in a vector database.
+- When a tutor requests a plan, the system retrieves matching strategies and guidelines based on the student’s context.
 
-Are visuals suggested with concepts? (dual coding)
+#### 🧠 2. Prompt Augmentation
+- Retrieved documents are injected into the AI prompt.
+- Prompts guide the AI to build plans using SoL techniques such as spaced repetition or dual coding.
 
-Adaptive Feedback Loop:
-Tutor feedback and student performance update future generation logic (e.g., adaptive review scheduling).
+#### ✔ 3. Post-Generation Verification
+Each output is verified for:
+- ✅ Revisit timing for spaced repetition
+- ✅ Presence of retrieval-based activities (e.g., quizzes)
+- ✅ Chunked structure for scaffolding complex concepts
+- ✅ Suggestions for visual aids or multi-modal content
 
-📚 References
-Kosslyn, S. M. (2017). The Science of Learning. In Building the Intentional University (MIT Press).
+#### 🔄 4. Adaptive Feedback
+- Tutor feedback and performance data guide future plans.
+- Adaptive review scheduling follows memory decay models (e.g., Tabibian et al., 2019).
 
-Larsen, D. (2018). Planning Education for Long-Term Retention: Retrieval Practice.
+---
 
-Tabibian, B. et al. (2019). Enhancing Human Learning via Spaced Repetition Optimization (PNAS).
+### 📚 References
 
-Meyer, S. (2024). The Forgetting Curve: How to Use Cognitive Science to Delay the Decline in Retention.
+- **Kosslyn, S. M.** (2017). *The Science of Learning*. In *Building the Intentional University*. MIT Press.  
+- **Larsen, D.** (2018). *Planning Education for Long-Term Retention: Retrieval Practice*.  
+- **Tabibian, B. et al.** (2019). *Enhancing Human Learning via Spaced Repetition Optimization*. PNAS.  
+- **Meyer, S.** (2024). *The Forgetting Curve: How to Use Cognitive Science to Delay Retention Loss*.  
+
+---
+
+> 💡 Built to help tutors teach smarter—not harder.
+
