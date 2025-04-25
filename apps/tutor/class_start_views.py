@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SectionStep1Form, SectionStep2Form, SectionStep3Form, InlineStudentForm
 from .models import Section
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
-class StartSectionWizardView(View):
+class StartSectionWizardView(LoginRequiredMixin, View):
     def get(self, request, step=1):
         step = int(step)
         if step == 1:
