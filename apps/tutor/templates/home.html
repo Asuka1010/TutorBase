@@ -1,6 +1,137 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1> Welcome to TutorBase! </h1>
-    <p><a href="{% url 'start_section' 1 %}" class="btn btn-primary">Start New Course</a></p>
+{% block outer_content %}
+
+    <h1 class="main-title">Welcome to TutorBase</h1>
+
+            <div class="dashboard-grid">
+                <!-- Students Section -->
+                <section class="students-section">
+                    <h2 class="section-title">Your Courses</h2>
+                    <div class="student-cards">
+                        {% for section in sections %}
+                        <!-- Student Card 1 -->
+                        <div class="card student-card">
+                            <h3>{{ section.name }}</h3>
+                            <p class="student-topic">Topic: {{ section.theme }}</p>
+                            <div class="card-actions">
+                                <!--<a href="student-details.html" class="btn btn-outline btn-sm">View Details</a>-->
+                                <a href="{% url 'section_detail' section.pk %}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-book"></i> View Syllabus
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Calendar Section -->
+                <section class="calendar-section">
+                    <h2 class="section-title">Upcoming Lessons</h2>
+                    <div class="card calendar-card">
+                        <div class="calendar-header">
+                            <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                            <h3 class="calendar-month">April 2025</h3>
+                            <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        <div class="calendar-days">
+                            <div class="calendar-day prev-month">30</div>
+                            <div class="calendar-day prev-month">31</div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day current-day">25</div>
+                            <div class="calendar-day has-event">26
+                                <span class="event-dot"></span>
+                            </div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day has-event">28
+                                <span class="event-dot"></span>
+                            </div>
+                            <div class="calendar-day has-event">29
+                                <span class="event-dot"></span>
+                            </div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day next-month">1</div>
+                            <div class="calendar-day next-month">2</div>
+                            <div class="calendar-day next-month">3</div>
+                        </div>
+                        <div class="upcoming-events">
+                            <h4>Today's Schedule</h4>
+                            <div class="event">
+                                <div class="event-time">10:00 AM - 11:00 AM</div>
+                                <div class="event-details">
+                                    <div class="event-title">Python Basics with Alex</div>
+                                    <div class="event-location"><i class="fas fa-video"></i> Zoom Meeting</div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="event-time">2:00 PM - 3:30 PM</div>
+                                <div class="event-details">
+                                    <div class="event-title">JavaScript with Sarah</div>
+                                    <div class="event-location"><i class="fas fa-video"></i> Google Meet</div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-sm view-all-btn">View All Events</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Quick Actions Section -->
+            <section class="quick-actions-section">
+                <h2 class="section-title">Quick Actions</h2>
+                <div class="quick-actions-grid">
+                    <a href="{% url 'student_add' %}" class="quick-action-card">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Student</span>
+                    </a>
+                    <a href="{% url 'student_list' %}" class="quick-action-card">
+                        <i class="fas fa-user"></i>
+                        <span>View Students</span>
+                    </a>
+                    <a href="{% url 'start_section' 1 %}" class="quick-action-card">
+                        <i class="fas fa-book"></i>
+                        <span>Create Syllabus</span>
+                    </a>
+                    <a href="#" class="quick-action-card">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Schedule Lesson</span>
+                    </a>
+                    <a href="#" class="quick-action-card">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Create Report</span>
+                    </a>
+                </div>
+            </section>
 {% endblock %}

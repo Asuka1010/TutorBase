@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{ section.name }}</h2>
+<!--<h2>{{ section.name }}</h2>
 <p><strong>Theme:</strong> {{ section.theme }}</p>
 <p><strong>Objective:</strong> {{ section.learning_objective }}</p>
 <p><strong>Student Characteristics:</strong> {{ section.student_characteristics }}</p>
@@ -26,5 +26,36 @@
     <hr>
     <h2>Syllabus</h2>
     <pre>{{ section.syllabus }}</pre>
-{% endif %}
+{% endif %}-->
+
+                <h2 class="section-title">{{ section.name }}</h2>
+
+                <div class="student-info">
+                    <h3>Topic: {{ section.theme }} | For: {{ section.student_names }}</h3>
+                </div>
+
+                <div class="syllabus-actions">
+                    <div>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <!--div>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>-->
+                </div>
+
+                <div class="syllabus-content">
+{{ section.syllabus }}
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'home' %}" class="btn btn-outline">Go Back</a>
+                    <!--<button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Syllabus
+                    </button>-->
+                </div>
+
 {% endblock %}

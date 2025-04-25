@@ -54,3 +54,6 @@ class Section(models.Model):
         ⏱️ Session Length: {self.length_of_session} minutes"""
         self.save()
 
+    def student_names(self):
+        return ", ".join(student.name for student in self.students.all())
+

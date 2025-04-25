@@ -1,0 +1,469 @@
+/* Base Styles and Variables */
+        :root {
+            /* Blue-only color scheme */
+            --primary: #2C5282; /* Deep blue */
+            --primary-light: #4A69BD; /* Lighter blue */
+            --primary-dark: #1A365D; /* Darker blue */
+            --accent: #63B3ED; /* Light blue accent (replacing gold) */
+            --accent-light: #90CDF4; /* Lighter blue accent */
+            --accent-dark: #3182CE; /* Darker blue accent */
+
+            /* Neutrals */
+            --white: #FFFFFF;
+            --gray-50: #F7FAFC;
+            --gray-100: #EDF2F7;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E0;
+            --gray-400: #A0AEC0;
+            --gray-500: #718096;
+            --gray-600: #4A5568;
+            --gray-700: #2D3748;
+            --gray-800: #1A202C;
+            --gray-900: #171923;
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+
+            /* Border radius */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: var(--gray-50);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            margin-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        /* Main Title */
+        .main-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--gray-800);
+            border: none;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-dark);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--gray-100);
+        }
+
+        .btn-sm {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.875rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: var(--spacing-md);
+            font-weight: 600;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-md);
+            transition: box-shadow 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Student Cards */
+        .student-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .student-card h3 {
+            color: var(--primary);
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+        }
+
+        .student-topic {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-md);
+        }
+
+        /* Calendar Styles */
+        .calendar-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .calendar-month {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .calendar-nav-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: var(--spacing-xs);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            background-color: var(--gray-100);
+            padding: var(--spacing-xs) 0;
+            color: var(--gray-700);
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 40px);
+            text-align: center;
+        }
+
+        .calendar-day {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .calendar-day:nth-child(7n) {
+            border-right: none;
+        }
+
+        .calendar-day:hover {
+            background-color: var(--gray-100);
+        }
+
+        .prev-month, .next-month {
+            color: var(--gray-400);
+        }
+
+        .current-day {
+            background-color: var(--accent-light);
+            color: var(--gray-800);
+            font-weight: bold;
+        }
+
+        .has-event {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .event-dot {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        .upcoming-events {
+            padding: var(--spacing-md);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .upcoming-events h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .event {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .event-time {
+            min-width: 140px;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        .event-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--gray-800);
+        }
+
+        .event-location {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .view-all-btn {
+            display: block;
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
+
+        /* Quick Actions Section */
+        .quick-actions-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .quick-action-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            background-color: var(--gray-50);
+            border-color: var(--primary-light);
+        }
+
+        .quick-action-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .quick-action-card span {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            color: var(--gray-500);
+            border-top: 1px solid var(--gray-200);
+            margin-top: var(--spacing-xl);
+        }
+
+        /* Student Info */
+        .student-info {
+            background-color: var(--gray-100);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid var(--primary);
+        }
+
+        .student-info h3 {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Syllabus Content */
+        .syllabus-content {
+            background-color: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .syllabus-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .student-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .syllabus-actions {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .syllabus-actions > div {
+                display: flex;
+                justify-content: center;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions a,
+            .form-actions button {
+                width: 100%;
+                text-align: center;
+            }
+        }

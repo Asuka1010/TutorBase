@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 {% load static %}
-
-<html lang="{{ LANGUAGE_CODE|default:'en_us' }}">
-
+<html lang="en">
 <head>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Page title -->
-    <title>{% block title %}{{ title }}{% endblock %}</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ title }} - TutorBase - AI Tutor Support Tool{% endblock %}</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css">
 
     {{ form.media }}
 
     {% block extra_head %}{% endblock %}
-
 </head>
-
 <body>
-{% include 'navbar.html' %}
-<div class="container-lg mt-5" style="max-width:900px">
-    {% block before_content %}
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="{% static 'tutorbase.png' %}" alt="TutorBase Logo">
+            </div>
+            <div class="header-actions">
+                {% if user.is_authenticated %}
+                    {% if request.resolver_match.view_name != 'home' %}
+                        <a href="{% url 'home' %}" class="btn btn-outline">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                        {% else %}
+
+                <a href="{% url 'start_section' 1 %}" class="btn btn-accent">
+                    <i class="fas fa-plus-circle"></i> Create New Syllabus
+                </a>
+                <a href="/accounts/profile/" class="btn btn-outline">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                        {% endif %}
+                    <form action="/accounts/logout/" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-outline" type="submit">Log out</button>
+                    </form>
+                {% else %}
+                    <a href="/accounts/profile/" class="btn btn-outline">
+                    <i class="fas fa-cog"></i> Login
+                </a>
+
+                {% endif %}
+            </div>
+        </header>
+
+        {% block before_content %}
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -36,28 +58,22 @@
             {% endfor %}
         {% endif %}
     {% endblock %}
-    <div id="content-main">
-        {% block content %} CONTENT {% endblock %}
-        {% if card_name %}
-            <hr>
-            <h5>Debugging Info</h5>
-            <p>Card Type Name: {{ card_name }}</p>
-        {% endif %}
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block outer_content %}
+                <div class="card" style="max-width: 800px; margin: 0 auto;">
+                {% block content %}
+                {% endblock %}
+                </div>
+            {% endblock %}
+        </main>
+        {% block after_content %}{% endblock %}
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 TutorBase. All rights reserved.</p>
+        </footer>
     </div>
-    {% block after_content %}{% endblock %}
-</div>
-
-<script
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
-
-
-{% block extra_script %}{% endblock %}
-
 </body>
-
 </html>
