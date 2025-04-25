@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ section.name }}</h2>
+<p><strong>Theme:</strong> {{ section.theme }}</p>
+<p><strong>Objective:</strong> {{ section.learning_objective }}</p>
+<p><strong>Student Characteristics:</strong> {{ section.student_characteristics }}</p>
+<p><strong>Number of Lessons:</strong> {{ section.number_of_lessons }}</p>
+<p><strong>Length of Sessions:</strong> {{ section.length_of_session }} minutes</p>
+
+<h4>Students</h4>
+<ul>
+  {% for student in section.students.all %}
+    <li>{{ student.name }}</li>
+  {% empty %}
+    <li>No students assigned.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'section_edit' section.pk %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'section_delete' section.pk %}" class="btn btn-danger">Delete</a>
+<form method="post" action="{% url 'generate_syllabus' section.pk %}" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-info">Generate Syllabus</button>
+</form>
+{% if section.syllabus %}
+    <hr>
+    <h2>Syllabus</h2>
+    <pre>{{ section.syllabus }}</pre>
+{% endif %}
+{% endblock %}

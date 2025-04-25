@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Start New Course – Step 3</h2>
+
+<!-- Section info + student selection -->
+<form method="post">
+  {% csrf_token %}
+  <h4>Student Characteristics</h4>
+  {{ form.student_characteristics|as_crispy_field }}
+
+  <h4 class="mt-4">Select Students</h4>
+  <ul class="list-unstyled">
+    {% for student in form.students %}
+      <li>{{ student.tag }} {{ student.choice_label }}</li>
+    {% endfor %}
+  </ul>
+
+  <button type="submit" name="submit_section" class="btn btn-success mt-3">
+    Finish and Create Course
+  </button>
+</form>
+
+<hr>
+
+<!-- Inline Add Student Form -->
+<form method="post" class="mt-4">
+  {% csrf_token %}
+  <h4>Add a New Student</h4>
+  {{ student_form|crispy }}
+  <button type="submit" name="add_student" class="btn btn-secondary">Add Student</button>
+</form>
+
+{% endblock %}

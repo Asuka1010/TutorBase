@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "Logged out" %}</h1>
+    <hr>
+    <p>You have been logged out. <a href="{% url 'login' %}">Click Here</a> to log back in.</p>
+{% endblock %}

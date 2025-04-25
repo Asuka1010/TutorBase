@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Courses</h2>
+<a href="{% url 'start_section' 1 %}" class="btn btn-primary mb-3">Add Course</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th style="width: 120px;">Edit</th>
+            <th style="width: 120px;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for section in sections %}
+        <tr>
+            <td><a href="{% url 'section_detail' section.pk %}">{{ section.name }}</a></td>
+            <td><a href="{% url 'section_edit' section.pk %}" class="btn btn-sm btn-warning">Edit</a></td>
+            <td>
+                <a href="{% url 'section_delete' section.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">You have no courses yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

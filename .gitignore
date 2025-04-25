@@ -1,0 +1,6 @@
+/static/
+/media/
+/.idea/
+*.pyc
+db.sqlite3
+.DS_Store

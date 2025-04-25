@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ student.name }}</h2>
+<p><strong>Language:</strong> {{ student.language }}</p>
+<p><strong>Country:</strong> {{ student.country }}</p>
+<p><strong>Goals:</strong> {{ student.goals }}</p>
+<p><strong>Personality:</strong> {{ student.personality }}</p>
+<p><strong>Interests:</strong> {{ student.interests }}</p>
+<p><strong>Hobbies:</strong> {{ student.hobbies }}</p>
+<p><strong>Current Grades:</strong> {{ student.current_grades }}</p>
+<a href="{% url 'student_edit' student.pk %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'student_delete' student.pk %}" class="btn btn-danger">Delete</a>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Edit Your Profile</h1>
+    <hr>
+  <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% crispy user_form %}
+      {% crispy profile_form %}
+
+      <div class="form-group">
+          <button class="btn btn-info" type="submit">Submit</button>
+      </div>
+  </form>
+{% endblock %}

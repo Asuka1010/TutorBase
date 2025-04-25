@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>{% if object %}Edit{% else %}Add{% endif %} Course</h2>
+<form method="post">{% csrf_token %}
+  {{ form|crispy }}
+<button type="submit" class="btn btn-success">
+  {% if is_create_view %}
+    Save and Generate Syllabus
+  {% else %}
+    Save
+  {% endif %}
+</button>
+</form>
+{% endblock %}

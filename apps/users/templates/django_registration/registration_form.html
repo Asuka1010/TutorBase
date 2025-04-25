@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Join Today!</h1>
+    <hr>
+    <form method="post" action=".">
+        {% csrf_token %}
+        {% with form_tag=False %}
+            {{form | crispy}}
+        {% endwith %}
+        <input class="btn btn-primary" type="submit" value="Save"/>
+    </form>
+{% endblock %}

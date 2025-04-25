@@ -1,0 +1,10 @@
+{% load i18n %}
+{% trans "Activate account at" %} Sekhana:
+
+http://{{ site.domain }}{% url 'django_registration_activate' activation_key %}
+
+{% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}
+
+If you have already activated your account, you can log in here:
+
+http://{{ site.domain }}/accounts/login/
