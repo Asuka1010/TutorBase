@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from utils.syllabus import SyllabusHelper
 
 
 class Student(models.Model):
@@ -7,11 +8,12 @@ class Student(models.Model):
     name = models.CharField(max_length=300)
     language = models.CharField(max_length=300, null=True, blank=True)
     country = models.CharField(max_length=300, verbose_name="Country of Residence", null=True, blank=True)
-    goals = models.TextField(null=True, blank=True)
+    goals = models.TextField(null=True, blank=True, verbose_name="Goal & Expectations for Tutors")
     personality = models.TextField(null=True, blank=True)
     interests = models.TextField(null=True, blank=True)
     hobbies = models.TextField(null=True, blank=True)
-    current_grades = models.TextField(null=True, blank=True)
+    current_grades = models.TextField(null=True, blank=True, verbose_name="Current Grade Level")
+    weak_areas = models.TextField(null=True, blank=True, verbose_name="Identified Weak Areas")
 
     def __str__(self):
         return self.name
@@ -52,6 +54,8 @@ class Section(models.Model):
         🎯 Objective: {self.learning_objective}
         📚 Lessons: {self.number_of_lessons}
         ⏱️ Session Length: {self.length_of_session} minutes"""
+        syllabus_helper = SyllabusHelper()
+        self.syllabus = syllabus_helper.generate(self)
         self.save()
 
     def student_names(self):

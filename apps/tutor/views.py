@@ -13,7 +13,8 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sections'] = Section.objects.filter(tutor=self.request.user)
+        if self.request.user.is_authenticated:
+            context['sections'] = Section.objects.filter(tutor=self.request.user)
         return context
 
 

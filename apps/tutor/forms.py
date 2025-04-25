@@ -12,6 +12,7 @@ class StudentForm(forms.ModelForm):
             'interests': forms.Textarea(attrs={'rows': 2}),
             'hobbies': forms.Textarea(attrs={'rows': 2}),
             'current_grades': forms.Textarea(attrs={'rows': 2}),
+            'weak_areas': forms.Textarea(attrs={'rows': 2}),
         }
 
 
@@ -81,4 +82,5 @@ class InlineStudentForm(forms.ModelForm):
             'interests': forms.Textarea(attrs={'rows': 2}),
             'hobbies': forms.Textarea(attrs={'rows': 2}),
             'current_grades': forms.Textarea(attrs={'rows': 2}),
+            'weak_areas': forms.Textarea(attrs={'rows': 2}),
         }
