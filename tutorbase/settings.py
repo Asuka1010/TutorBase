@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-41k=%1-tp$7j9m6pdz!@wh7$bm84lrz%bd4^w$win#6@^%v!44
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'asuka1010.pythonanywhere.com']
 
 
 # Application definition
@@ -139,3 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGOUT_REDIRECT_URL = "/"
+
+try:
+    from .settings_local import *
+except ImportError:
+    pass
