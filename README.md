@@ -6,6 +6,7 @@ TutorBase is an AI-assisted tutor support platform that auto-generates personali
 
 *Demo video*: 
 https://www.youtube.com/watch?v=c6bAexUtCjA
+
 ---
 
 ### ✅ Core Learning Principles Used
