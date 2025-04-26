@@ -1,7 +1,6 @@
 ## 🧠 Science of Learning Integration (SoL)
 
-**TutorBase** is an AI-powered tutor support system that personalizes syllabi, lesson plans, and assessments based on principles from the **Science of Learning**.  
-It draws from cognitive psychology to help tutors design effective learning experiences for 1-on-1 programming students.
+TutorBase is an AI-assisted tutor support platform that auto-generates personalized syllabi, lesson plans, and assessments using NLP and RAG. It embeds cognitive science principles like spaced repetition, active recall, and dual coding to optimize learning outcomes through adaptive content generation and schema-aligned instructional design.
 
 ---
 
