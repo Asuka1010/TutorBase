@@ -2,7 +2,10 @@
 
 TutorBase is an AI-assisted tutor support platform that auto-generates personalized syllabi, lesson plans, and assessments using NLP and RAG. It embeds cognitive science principles like spaced repetition, active recall, and dual coding to optimize learning outcomes through adaptive content generation and schema-aligned instructional design.
 
-*Demo video*: https://www.youtube.com/watch?v=c6bAexUtCjA
+*Product Link*: https://asuka1010.pythonanywhere.com/
+
+*Demo video*: 
+https://www.youtube.com/watch?v=c6bAexUtCjA
 ---
 
 ### ✅ Core Learning Principles Used
