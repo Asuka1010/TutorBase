@@ -58,6 +58,10 @@
             color: inherit;
         }
 
+        p {
+            margin: 10px 0px;
+        }
+
         /* Container */
         .container {
             max-width: 1200px;

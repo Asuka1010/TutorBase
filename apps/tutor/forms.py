@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student, Section
+from .models import Student, Section, Lesson
 
 
 class StudentForm(forms.ModelForm):
@@ -83,4 +83,36 @@ class InlineStudentForm(forms.ModelForm):
             'hobbies': forms.Textarea(attrs={'rows': 2}),
             'current_grades': forms.Textarea(attrs={'rows': 2}),
             'weak_areas': forms.Textarea(attrs={'rows': 2}),
+        }
+
+
+class LessonStep1Form(forms.ModelForm):
+    class Meta:
+        model = Lesson
+        fields = ['date', 'name', 'topic', 'grade_level', 'duration']
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+
+
+class LessonStep2Form(forms.ModelForm):
+    class Meta:
+        model = Lesson
+        fields = ['objectives', 'materials', 'other_details']
+        widgets = {
+            'objectives': forms.Textarea(attrs={'rows': 3}),
+            'materials': forms.Textarea(attrs={'rows': 3}),
+            'other_details': forms.Textarea(attrs={'rows': 3}),
+        }
+
+
+class LessonForm(forms.ModelForm):
+    class Meta:
+        model = Lesson
+        fields = ['date', 'name', 'topic', 'grade_level', 'duration', 'objectives', 'materials', 'other_details']
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'objectives': forms.Textarea(attrs={'rows': 3}),
+            'materials': forms.Textarea(attrs={'rows': 3}),
+            'other_details': forms.Textarea(attrs={'rows': 3}),
         }
