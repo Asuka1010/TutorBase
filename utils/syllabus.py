@@ -1,19 +1,17 @@
-from rag.pipeline import RAGPipeline
-import os
-from dotenv import load_dotenv
+#from rag.pipeline import RAGPipeline
+from django.conf import settings
+from .AI import AI
 
-load_dotenv()
-OPENROUTER_API = os.getenv("OPENROUTER_API")
 
-class SyllabusHelper:
-    def __init__(self):
-        # rag/pipeline의 RAGPipeline 사용
-        self.pipeline = RAGPipeline(
-            vector_db_path="rag/vectorDB/faiss_index.index",
-            docs_path="rag/vectorDB/metadata.pkl",
-            reranker_model_name="cross-encoder/ms-marco-MiniLM-L-6-v2",
-            openai_api_key=OPENROUTER_API
-        )
+class SyllabusHelper(AI):
+    # def __init__(self):
+    #     # rag/pipeline의 RAGPipeline 사용
+    #     self.pipeline = RAGPipeline(
+    #         vector_db_path="rag/vectorDB/faiss_index.index",
+    #         docs_path="rag/vectorDB/metadata.pkl",
+    #         reranker_model_name="cross-encoder/ms-marco-MiniLM-L-6-v2",
+    #         openai_api_key=settings.OPENROUTER_API
+    #     )
 
     def generate(self, section):
         """
@@ -74,7 +72,8 @@ Student {i}:
 - Make it practical and age-appropriate.
 """
 
-        response = self.pipeline.run(prompt)
+        #response = self.pipeline.run(prompt)
+        response = self.ask(prompt)
 
         # Validate response and ensure correct output format
         if response:

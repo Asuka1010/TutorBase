@@ -62,6 +62,10 @@
             margin: 10px 0px;
         }
 
+        h1{
+            color: var(--primary);
+        }
+
         /* Container */
         .container {
             max-width: 1200px;
