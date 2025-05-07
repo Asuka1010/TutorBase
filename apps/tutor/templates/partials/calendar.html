@@ -1,0 +1,19 @@
+{# templates/partials/calendar.html #}
+{% for week in calendar_weeks %}
+  <div class="calendar-week d-flex">
+    {% for day in week %}
+      <div class="calendar-day {% if not day.in_current_month %}text-muted{% endif %}
+                              {% if day.date == today %} current-day{% endif %}
+                              {% if day.date.day in lessons_by_day %} has-event{% endif %}"
+           hx-get="{% url 'calendar_day_view' %}?date={{ day.date|date:'Y-m-d' }}"
+           hx-target="#day-lessons"
+           hx-swap="innerHTML"
+           style="cursor:pointer;">
+        {{ day.date.day }}
+        {% if day.date.day in lessons_by_day %}
+          <span class="event-dot"></span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endfor %}

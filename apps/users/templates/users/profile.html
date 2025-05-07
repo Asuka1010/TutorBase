@@ -1,25 +1,31 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-      <div class="media">
-        <!--<img class="account-img" src="{{ user.profile.image.url }}">-->
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.first_name | capfirst }} {{ user.last_name | capfirst }} ({{ user.username }})</h2>
-          <p class="text-secondary">{{ user.email }}</p>
-            {% if user.profile.subjects_taught %}
-            <p><strong>What subjects do you teach?</strong></p>
-            <p>{{ user.profile.subjects_taught |linebreaksbr }}</p>
-            {% endif %}
-        {% if user.profile.languages %}
-            <p><strong>What languages do you teach in?</strong></p>
-            <p>{{ user.profile.languages |linebreaksbr }}</p>
-            {% endif %}
-        {% if user.profile.tools_available %}
-            <p><strong>What tools do you have available?</strong></p>
-            <p>{{ user.profile.tools_available |linebreaksbr }}</p>
-            {% endif %}
-        </div>
-      </div>
+<div class="d-flex align-items-start mb-4">
+  <!-- Uncomment and style if you use profile images -->
+  <!-- <img src="{{ user.profile.image.url }}" class="rounded-circle mr-3" alt="Profile image" width="100"> -->
+
+  <div>
+    <h2 class="h4 mb-1">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }} ({{ user.username }})</h2>
+    <p class="text-muted mb-3">{{ user.email }}</p>
+
+    {% if user.profile.subjects_taught %}
+      <p class="mb-1"><strong>What subjects do you teach?</strong></p>
+      <p>{{ user.profile.subjects_taught|linebreaksbr }}</p>
+    {% endif %}
+
+    {% if user.profile.languages %}
+      <p class="mb-1"><strong>What languages do you teach in?</strong></p>
+      <p>{{ user.profile.languages|linebreaksbr }}</p>
+    {% endif %}
+
+    {% if user.profile.tools_available %}
+      <p class="mb-1"><strong>What tools do you have available?</strong></p>
+      <p>{{ user.profile.tools_available|linebreaksbr }}</p>
+    {% endif %}
+  </div>
+</div>
+
     <!-- Put other profile fields here -->
     <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a>
 {% endblock content %}

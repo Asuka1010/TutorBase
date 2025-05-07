@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="student-info mb-4">
+  <h3>
+    Lessons for Course: {{ section.theme }} |
+    For: {{ section.student_names }}
+  </h3>
+</div>
+
+    <a href="{% url 'start_lesson' section.id 1 %}" class="btn btn-primary mb-3">
+      <i class="fas fa-plus"></i> Add New Lesson
+    </a>
+    <p>&nbsp;</p>
+
+{% if lessons %}
+  <div class="list-group">
+    {% for lesson in lessons %}
+      <div class="list-group-item mb-3">
+        <h3 class="mb-1">{{ lesson.name }}</h3>
+        <p class="mb-1"><strong>Date:</strong> {{ lesson.date|date:"M d, Y H:i" }}</p>
+        <p class="mb-1"><strong>Topic:</strong> {{ lesson.topic }}</p>
+
+        <div class="d-flex justify-content-start"></div>
+            <a href="{% url 'lesson_detail' lesson.pk %}" class="btn btn-outline-secondary btn-sm mr-2">
+            <i class="fas fa-book"></i> Lesson Details
+          </a>
+        </div>
+        <hr>
+    {% endfor %}
+    <div class="form-actions">
+        <a href="{% url 'section_detail' section.pk %}" class="btn btn-outline">Go Back To Course</a>
+    </div>
+  </div>
+{% else %}
+  <p>No lessons created yet for this section.</p>
+{% endif %}
+
+
+
+{% endblock %}

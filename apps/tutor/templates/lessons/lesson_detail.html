@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load markdownify %}
+{% block content %}
+                <h2 class="section-title">{{ lesson.name }}</h2>
+
+                <div class="student-info">
+                    <h3>Topic: {{ lesson.topic }} | At: {{ lesson.date }}</h3>
+                </div>
+
+                <div class="syllabus-actions">
+                    <div>
+                        <a href="{% url 'lesson_edit' lesson.pk %}" class="btn btn-outline">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form method="post" action="{% url 'generate_lesson_plan' lesson.pk %}" style="display:inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-info"><i class="fas fa-edit"></i> Regenerate Lesson Plan</button>
+                        </form>
+
+                    </div>
+                    <!--div>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>-->
+                </div>
+
+                <div class="syllabus-content">
+{{ lesson.lesson_plan }}
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'lesson_list' lesson.section.pk %}" class="btn btn-outline">Go Back to Lessons</a>
+                    <!--<button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Syllabus
+                    </button>-->
+                </div>
+
+{% endblock %}

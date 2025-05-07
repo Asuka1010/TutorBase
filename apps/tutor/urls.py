@@ -12,6 +12,12 @@ from .views import (
     SectionDetailView,
     SectionUpdateView,
     GenerateSyllabusView,
+    StartLessonWizardView,
+    LessonListView,
+    LessonUpdateView,
+    GenerateLessonPlanView,
+    LessonDetailView,
+    CalendarPartialView,
 )
 from .class_start_views import StartSectionWizardView
 
@@ -29,5 +35,10 @@ urlpatterns = [
     path('sections/<int:pk>/delete/', SectionDeleteView.as_view(), name='section_delete'),
     path('sections/<int:pk>/generate_syllabus/', GenerateSyllabusView.as_view(), name='generate_syllabus'),
     path('sections/start/<int:step>/', StartSectionWizardView.as_view(), name='start_section'),
-
+    path('sections/<int:section_id>/lessons/start/<int:step>/', StartLessonWizardView.as_view(), name='start_lesson'),
+    path('sections/<int:section_id>/lessons/', LessonListView.as_view(), name='lesson_list'),
+    path('lessons/<int:pk>/edit/', LessonUpdateView.as_view(), name='lesson_edit'),
+    path('lessons/<int:pk>/generate-plan/', GenerateLessonPlanView.as_view(), name='generate_lesson_plan'),
+    path('lessons/<int:pk>/', LessonDetailView.as_view(), name='lesson_detail'),
+    path('calendar/partial/', CalendarPartialView.as_view(), name='calendar_partial'),
 ]

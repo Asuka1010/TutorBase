@@ -27,85 +27,56 @@
 
                 <!-- Calendar Section -->
                 <section class="calendar-section">
-                    <h2 class="section-title">Upcoming Lessons</h2>
+                    <h2 class="section-title">Lessons Calendar</h2>
                     <div class="card calendar-card">
-                        <div class="calendar-header">
-                            <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                            <h3 class="calendar-month">April 2025</h3>
-                            <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                        <div class="calendar-header d-flex justify-content-between align-items-center">
+                            <a href="?month={{ month|add:"-1" }}&year={{ year }}" class="calendar-nav-btn">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            <h3 class="calendar-month">{{ calendar_month_name }}</h3>
+                            <a href="?month={{ month|add:"1" }}&year={{ year }}" class="calendar-nav-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
                         </div>
-                        <div class="calendar-weekdays">
-                            <div>Sun</div>
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
+
+                        <div class="calendar-weekdays d-flex justify-content-between">
+                            <div>Sun</div><div>Mon</div><div>Tue</div>
+                            <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
                         </div>
-                        <div class="calendar-days">
-                            <div class="calendar-day prev-month">30</div>
-                            <div class="calendar-day prev-month">31</div>
-                            <div class="calendar-day">1</div>
-                            <div class="calendar-day">2</div>
-                            <div class="calendar-day">3</div>
-                            <div class="calendar-day">4</div>
-                            <div class="calendar-day">5</div>
-                            <div class="calendar-day">6</div>
-                            <div class="calendar-day">7</div>
-                            <div class="calendar-day">8</div>
-                            <div class="calendar-day">9</div>
-                            <div class="calendar-day">10</div>
-                            <div class="calendar-day">11</div>
-                            <div class="calendar-day">12</div>
-                            <div class="calendar-day">13</div>
-                            <div class="calendar-day">14</div>
-                            <div class="calendar-day">15</div>
-                            <div class="calendar-day">16</div>
-                            <div class="calendar-day">17</div>
-                            <div class="calendar-day">18</div>
-                            <div class="calendar-day">19</div>
-                            <div class="calendar-day">20</div>
-                            <div class="calendar-day">21</div>
-                            <div class="calendar-day">22</div>
-                            <div class="calendar-day">23</div>
-                            <div class="calendar-day">24</div>
-                            <div class="calendar-day current-day">25</div>
-                            <div class="calendar-day has-event">26
-                                <span class="event-dot"></span>
-                            </div>
-                            <div class="calendar-day">27</div>
-                            <div class="calendar-day has-event">28
-                                <span class="event-dot"></span>
-                            </div>
-                            <div class="calendar-day has-event">29
-                                <span class="event-dot"></span>
-                            </div>
-                            <div class="calendar-day">30</div>
-                            <div class="calendar-day next-month">1</div>
-                            <div class="calendar-day next-month">2</div>
-                            <div class="calendar-day next-month">3</div>
+
+                        <div class="calendar-days d-flex flex-wrap">
+                            {% for week in calendar_weeks %}
+                                {% for day in week %}
+                                    <a href="?year={{ day.date.year }}&month={{ day.date.month }}&date={{ day.date|date:'Y-m-d' }}"
+                                       class="calendar-day {% if not day.in_current_month %}text-muted{% endif %}
+                                                           {% if day.is_today %}current-day{% endif %}
+                                                           {% if day.has_event %}has-event{% endif %}">
+                                        {{ day.date.day }}
+                                        {% if day.has_event %}
+                                            <span class="event-dot"></span>
+                                        {% endif %}
+                                    </a>
+                                {% endfor %}
+                            {% endfor %}
                         </div>
-                        <div class="upcoming-events">
-                            <h4>Today's Schedule</h4>
-                            <div class="event">
-                                <div class="event-time">10:00 AM - 11:00 AM</div>
-                                <div class="event-details">
-                                    <div class="event-title">Python Basics with Alex</div>
-                                    <div class="event-location"><i class="fas fa-video"></i> Zoom Meeting</div>
+
+                        <div class="upcoming-events mt-4">
+                            <h4>Lessons on {{ selected_date|date:"F j, Y" }}</h4>
+                            {% for lesson in lessons_for_selected_day %}
+                                <div class="event mb-2">
+                                    <div class="event-time">{{ lesson.date|time:"g:i A" }}</div>
+                                    <div class="event-details">
+                                        <div class="event-title">{{ lesson.name }}</div>
+                                        <div class="event-topic">{{ lesson.topic }}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="event">
-                                <div class="event-time">2:00 PM - 3:30 PM</div>
-                                <div class="event-details">
-                                    <div class="event-title">JavaScript with Sarah</div>
-                                    <div class="event-location"><i class="fas fa-video"></i> Google Meet</div>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-outline btn-sm view-all-btn">View All Events</a>
+                            {% empty %}
+                                <p>No lessons scheduled.</p>
+                            {% endfor %}
                         </div>
                     </div>
                 </section>
+
             </div>
 
             <!-- Quick Actions Section -->
@@ -124,14 +95,14 @@
                         <i class="fas fa-book"></i>
                         <span>Create Syllabus</span>
                     </a>
-                    <a href="#" class="quick-action-card">
+                    <!--<a href="#" class="quick-action-card">
                         <i class="fas fa-calendar-plus"></i>
                         <span>Schedule Lesson</span>
                     </a>
                     <a href="#" class="quick-action-card">
                         <i class="fas fa-file-alt"></i>
                         <span>Create Report</span>
-                    </a>
+                    </a>-->
                 </div>
             </section>
 {% endblock %}

@@ -61,3 +61,40 @@ class Section(models.Model):
     def student_names(self):
         return ", ".join(student.name for student in self.students.all())
 
+
+class Lesson(models.Model):
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name="lessons")
+    date = models.DateTimeField()
+    name = models.CharField(max_length=500, verbose_name="Name of the Lesson")
+    topic = models.CharField(max_length=1000, verbose_name="Topic of Lesson")
+    grade_level = models.CharField(max_length=300)
+    duration = models.IntegerField(help_text="in minutes", verbose_name="Lesson Duration")
+
+    objectives = models.TextField(blank=True, null=True, verbose_name="What are the objectives for this lesson?")
+    materials = models.TextField(blank=True, null=True, verbose_name="What materials (if any) do you want to use?")
+    other_details = models.TextField(blank=True, null=True, verbose_name="Any other details about the lesson?")
+
+    lesson_plan = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.date.date()})"
+
+    def generate_lesson_plan(self):
+        self.lesson_plan = f"""📘 Lesson Plan for {self.name}
+
+📅 Date: {self.date.strftime('%B %d, %Y at %I:%M %p')}
+🎓 Topic: {self.topic}
+🎯 Grade Level: {self.grade_level}
+⏱️ Duration: {self.duration} minutes
+
+## Objectives
+{self.objectives or "Not provided"}
+
+## Materials
+{self.materials or "Not provided"}
+
+## Other Details
+{self.other_details or "None"}
+
+"""
+        self.save()
