@@ -1,5 +1,9 @@
 from django import forms
-from .models import Student, Section, Lesson
+from .models import Student, Section, Lesson, Resource
+from django.forms import ModelMultipleChoiceField
+from django.forms import inlineformset_factory
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column, Field
 
 
 class StudentForm(forms.ModelForm):
@@ -14,9 +18,6 @@ class StudentForm(forms.ModelForm):
             'current_grades': forms.Textarea(attrs={'rows': 2}),
             'weak_areas': forms.Textarea(attrs={'rows': 2}),
         }
-
-
-from django.forms import ModelMultipleChoiceField
 
 
 class SectionForm(forms.ModelForm):
@@ -116,3 +117,53 @@ class LessonForm(forms.ModelForm):
             'materials': forms.Textarea(attrs={'rows': 3}),
             'other_details': forms.Textarea(attrs={'rows': 3}),
         }
+
+
+class ResourceForm(forms.ModelForm):
+    class Meta:
+        model = Resource
+        fields = ['name', 'url', 'file']
+        widgets = {
+            'url': forms.URLInput(attrs={'placeholder': 'https://...'}),
+            'file': forms.ClearableFileInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False  # Don't wrap each subform in <form>
+        self.helper.layout = Layout(
+            Row(
+                Column(Field('name'), css_class='col-md-4'),
+                Column(Field('url'), css_class='col-md-4'),
+                Column(Field('file'), css_class='col-md-4'),
+            ),
+            Row(
+                Column('DELETE', css_class='col-md-2') if 'DELETE' in self.fields else ''
+            )
+        )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('name')
+        url = cleaned_data.get('url')
+        file = cleaned_data.get('file')
+
+        if name:
+            if bool(url) == bool(file):  # both provided or neither
+                raise forms.ValidationError("Provide either a URL or a file (not both) when a name is entered.")
+
+
+SectionResourceFormSet = inlineformset_factory(
+    Section, Resource,
+    form=ResourceForm,
+    extra=1,
+    can_delete=True
+)
+
+LessonResourceFormSet = inlineformset_factory(
+    Lesson, Resource,
+    form=ResourceForm,
+    extra=1,
+    can_delete=True
+)

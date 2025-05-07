@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
 {% block content %}
-<h2>Create Lesson Plan - Step {{ step }}</h2>
-
-    {% if step >= 3 %}
-        <p>Has any details changed about your student?</p>
-    {% endif %}
-
-<form method="post">
+<h2>Start New Course – Step {{ step }}</h2>
+<form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form|crispy }}
 
-{% if resource_formset %}
+  {% if resource_formset %}
   <h4 class="mt-4">Resources</h4>
   {{ resource_formset.management_form }}
 
@@ -27,14 +21,9 @@
   <button type="button" class="btn btn-outline-secondary" id="add-resource">+ Add Resource</button>
 {% endif %}
 
-  <button type="submit" class="btn btn-success">
-      {% if section.students.count|add:2 == step %}
-        Generate Lesson
-      {% else %}
-        Next
-      {% endif %}
-    </button>
+  <button type="submit" class="btn btn-primary">Next</button>
 </form>
+
 {% endblock %}
 
 {% block extra_head %}
@@ -48,17 +37,24 @@
       const formCount = parseInt(totalForms.value);
       const newForm = container.children[0].cloneNode(true);
 
+      // Update each input's name/id/index
       newForm.querySelectorAll('input, select, textarea').forEach(input => {
-        if (input.name) {
-          input.name = input.name.replace(/resource_set-\d+-/, `resource_set-${formCount}-`);
+        const name = input.name;
+        const id = input.id;
+
+        if (name) {
+          input.name = name.replace(/resource_set-\d+-/, `resource_set-${formCount}-`);
         }
-        if (input.id) {
-          input.id = input.id.replace(/resource_set-\d+-/, `resource_set-${formCount}-`);
+        if (id) {
+          input.id = id.replace(/resource_set-\d+-/, `resource_set-${formCount}-`);
         }
 
+        // Clear values
         if (input.type === 'checkbox') {
           input.checked = false;
-        } else if (input.type !== 'hidden') {
+        } else if (input.type === 'file') {
+          input.value = ''; // files can't be set via JS anyway
+        } else {
           input.value = '';
         }
       });

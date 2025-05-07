@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h2>Start New Course – Step {{ step }}</h2>
-<form method="post">{% csrf_token %}
+<form method="post">
+    {% csrf_token %}
   {{ form|crispy }}
   <button type="submit" class="btn btn-success">Next</button>
 </form>

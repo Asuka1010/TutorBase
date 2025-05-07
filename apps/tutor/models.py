@@ -9,7 +9,7 @@ class Student(models.Model):
     name = models.CharField(max_length=300)
     language = models.CharField(max_length=300, null=True, blank=True)
     country = models.CharField(max_length=300, verbose_name="Country of Residence", null=True, blank=True)
-    goals = models.TextField(null=True, blank=True, verbose_name="Goal & Expectations for Tutors")
+    goals = models.TextField(null=True, blank=True, verbose_name="Goal & Expectations")
     personality = models.TextField(null=True, blank=True)
     interests = models.TextField(null=True, blank=True)
     hobbies = models.TextField(null=True, blank=True)
@@ -41,8 +41,6 @@ class Section(models.Model):
     number_of_lessons = models.IntegerField()
     length_of_session = models.IntegerField(help_text="in minutes")
     syllabus = models.TextField(null=True, blank=True)
-
-    resources = models.ManyToManyField('Resource', blank=True)
 
     class Meta:
         verbose_name = "Course"
@@ -77,8 +75,6 @@ class Lesson(models.Model):
     materials = models.TextField(blank=True, null=True, verbose_name="What materials (if any) do you want to use?")
     other_details = models.TextField(blank=True, null=True, verbose_name="Any other details about the lesson?")
 
-    resources = models.ManyToManyField('Resource', blank=True)
-
     lesson_plan = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -103,6 +99,9 @@ class Lesson(models.Model):
 
 
 class Resource(models.Model):
+    section = models.ForeignKey('Section', on_delete=models.CASCADE, null=True, blank=True)
+    lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE, null=True, blank=True)
+
     name = models.CharField(max_length=1000)
     url = models.URLField(null=True, blank=True)
     file = models.FileField(null=True, blank=True)
