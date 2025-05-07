@@ -5,3 +5,6 @@
 db.sqlite3
 .DS_Store
 settings_local.py
+.env
+rag/papers
+rag/vectorDB
