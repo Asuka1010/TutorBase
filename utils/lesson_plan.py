@@ -1,8 +1,6 @@
 from .AI import AI
 
 class LessonPlanHelper(AI):
-    def __init__(self, api_key=None):
-        super().__init__(api_key=api_key)
 
     def generate(self, section, session_number, syllabus_content):
         """
