@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from utils.syllabus import SyllabusHelper
+from utils.lesson_plan import LessonPlanHelper
 
 
 class Student(models.Model):
@@ -84,23 +85,20 @@ class Lesson(models.Model):
         return f"{self.name} ({self.date.date()})"
 
     def generate_lesson_plan(self):
+        section = self.section
+        syllabus_content = section.syllabus
+
+        lessons = list(section.lessons.order_by('date'))
+        session_number = lessons.index(self) + 1 if self in lessons else 1
+
         self.lesson_plan = f"""📘 Lesson Plan for {self.name}
-
-📅 Date: {self.date.strftime('%B %d, %Y at %I:%M %p')}
-🎓 Topic: {self.topic}
-🎯 Grade Level: {self.grade_level}
-⏱️ Duration: {self.duration} minutes
-
-## Objectives
-{self.objectives or "Not provided"}
-
-## Materials
-{self.materials or "Not provided"}
-
-## Other Details
-{self.other_details or "None"}
-
-"""
+        📅 Date: {self.date.strftime('%B %d, %Y at %I:%M %p')}
+        🎓 Topic: {self.topic}
+        🎯 Grade Level: {self.grade_level}
+        ⏱️ Duration: {self.duration} minutes
+        """
+        lesson_plan_helper = LessonPlanHelper()
+        self.lesson_plan = lesson_plan_helper.generate(section, session_number, syllabus_content)
         self.save()
 
 
