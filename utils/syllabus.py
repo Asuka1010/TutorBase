@@ -7,7 +7,7 @@ class SyllabusHelper(AI):
         prompt = f"""
 You are an expert private tutor and curriculum designer.
 
-Please create a personalized curriculum syllabus for tutoring on the subject of:  
+Please create a personalized curriculum syllabus for neurodivergent students (ADHD, Autism, Dyslexia, Dyspraxia, etc.) on the subject of:  
 {section.theme}
 
 - Number of Sessions:  {section.number_of_lessons}  
