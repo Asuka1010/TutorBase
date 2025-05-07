@@ -8,3 +8,6 @@ settings_local.py
 .env
 rag/papers
 rag/vectorDB
+tutorbase/bin
+tutorbase/lib
+tutorbase/pyvenv.cfg
