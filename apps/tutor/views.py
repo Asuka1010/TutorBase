@@ -276,7 +276,7 @@ class StartLessonWizardView(LoginRequiredMixin, View):
             index = step - 3
 
             if index >= len(students):
-                lesson.lesson_plan = lesson.generate_lesson_plan()
+                lesson.generate_lesson_plan()
                 lesson.save()
                 request.session.pop('lesson_id', None)
                 return redirect('lesson_detail', pk=lesson.id)

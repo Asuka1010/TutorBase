@@ -95,6 +95,7 @@ class Lesson(models.Model):
         """
         lesson_plan_helper = LessonPlanHelper()
         self.lesson_plan = lesson_plan_helper.generate(section, session_number, syllabus_content)
+        print(self.lesson_plan)
         self.save()
 
 

@@ -112,8 +112,10 @@ Create a detailed lesson plan for Session {session_number} that includes:
 
         #response = self.pipeline.run(prompt)
         response = self.ask(prompt)
+        print(response)
 
         # Validate response and ensure correct output format
         if response:
             return response
+        print("fail")
         return None  # Return None if response is invalid
