@@ -1,6 +1,19 @@
+from rag.pipeline import RAGPipeline
+import os
+from dotenv import load_dotenv
 from .AI import AI
 
+load_dotenv()
+OPENROUTER_API = os.getenv("OPENROUTER_API")
+
 class LessonPlanHelper(AI):
+    def __init__(self):
+        self.pipeline = RAGPipeline(
+            vector_db_path="rag/vectorDB/faiss_index.index",
+            docs_path="rag/vectorDB/metadata.pkl",
+            reranker_model_name="cross-encoder/ms-marco-MiniLM-L-6-v2",
+            openai_api_key=OPENROUTER_API
+        )
 
     def generate(self, section, session_number, syllabus_content):
         """
@@ -90,7 +103,6 @@ Create a detailed lesson plan for Session {session_number} that includes:
    - Assignment of any homework
 
 ### Constraints:
-
 - Ensure alignment with the overall syllabus
 - Make activities engaging and interactive
 - Include clear time allocations
@@ -101,9 +113,9 @@ Create a detailed lesson plan for Session {session_number} that includes:
 - Ensure smooth transitions between activities
 """
 
-        response = self.ask(prompt)
+        response = self.pipeline.run(prompt)
 
         # Validate response and ensure correct output format
         if response:
             return response
-        return None  # Return None if response is invalid 
+        return None  # Return None if response is invalid
