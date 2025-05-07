@@ -87,6 +87,12 @@ class Lesson(models.Model):
         lessons = list(section.lessons.order_by('date'))
         session_number = lessons.index(self) + 1 if self in lessons else 1
 
+        self.lesson_plan = f"""📘 Lesson Plan for {self.name}
+        📅 Date: {self.date.strftime('%B %d, %Y at %I:%M %p')}
+        🎓 Topic: {self.topic}
+        🎯 Grade Level: {self.grade_level}
+        ⏱️ Duration: {self.duration} minutes
+        """
         lesson_plan_helper = LessonPlanHelper()
         self.lesson_plan = lesson_plan_helper.generate(section, session_number, syllabus_content)
         self.save()
