@@ -14,7 +14,7 @@ class LessonPlanHelper(AI):
             syllabus_content: The content of the syllabus to ensure consistency
         """
         prompt = f"""
-You are an expert teacher and lesson planner.
+You are an expert teacher and lesson planner. You are creating a lesson plan for neurodivergent students (ADHD, Autism, Dyslexia, Dyspraxia, etc.)
 
 Please create a detailed lesson plan for Session {session_number} of the following course:
 
