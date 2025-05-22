@@ -54,6 +54,9 @@ Student {i}:
 
         prompt += """
 ### Your Task:
+Please follow the instructions below and write your response in **plain text only**.
+Do not use markdown formatting like asterisks (**), hashtags (#), or heading styles. 
+You may use numbered lists (1., 2., etc.) and dashes (-) to organize your response.
 
 1. Analyze the weak areas and break them down into key sub-skills or components.  
 2. Generate SMART Learning Objectives for each sub-skill.
