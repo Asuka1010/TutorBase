@@ -5,9 +5,9 @@ class SyllabusHelper(AI):
 
     def generate(self, section):
         prompt = f"""
-You are an expert private tutor and curriculum designer.
+You are an expert teacher and curriculum designer.
 
-Please create a personalized curriculum syllabus for neurodivergent students (ADHD, Autism, Dyslexia, Dyspraxia, etc.) on the subject of:  
+Please create a personalized curriculum syllabus for student on the subject of:  
 {section.theme}
 
 - Number of Sessions:  {section.number_of_lessons}  
@@ -24,7 +24,7 @@ Here is the student's information:
         for i, student in enumerate(section.students.all(), start=1):
             prompt += f"""
 Student {i}:
-- Goal & Expectations for Tutors:  {student.goals or "Not provided"}
+- Goal & Expectations for Students:  {student.goals or "Not provided"}
 
 - Current Grade/Level in Subject:  {student.current_grades or "Not provided"}
 
@@ -45,7 +45,7 @@ Student {i}:
 
 2. Generate SMART Learning Objectives for each sub-skill.
 
-3. Structure a long-term curriculum across the tutoring period into a overall roadmap, with clear themes or focus areas.  
+3. Structure a long-term curriculum across the teaching period into a overall roadmap, with clear themes or focus areas.  
    *(e.g., Session 1: Vocabulary Mastery)*
 
 4. For each session:

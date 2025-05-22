@@ -1,8 +1,6 @@
 from .AI import AI
 
 class LessonPlanHelper(AI):
-    def __init__(self, api_key=None):
-        super().__init__(api_key=api_key)
 
     def generate(self, section, session_number, syllabus_content):
         """
@@ -14,7 +12,7 @@ class LessonPlanHelper(AI):
             syllabus_content: The content of the syllabus to ensure consistency
         """
         prompt = f"""
-You are an expert teacher and lesson planner. You are creating a lesson plan for neurodivergent students (ADHD, Autism, Dyslexia, Dyspraxia, etc.)
+You are an expert teacher and lesson planner. You are creating a lesson plan for student.
 
 Please create a detailed lesson plan for Session {session_number} of the following course:
 
