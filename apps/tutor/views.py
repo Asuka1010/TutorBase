@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, TemplateView, RedirectVie
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .models import Student, Section, Lesson
-from .forms import StudentForm, SectionForm, LessonStep1Form, LessonStep2Form, LessonForm
+from .forms import StudentForm, SectionForm, LessonStep1Form, LessonStep2Form, LessonForm, LessonResourceFormSet
 from django.views import View
 from django.contrib import messages
 from datetime import datetime, timedelta
@@ -255,43 +255,46 @@ class StartLessonWizardView(LoginRequiredMixin, View):
         step = int(step)
         lesson = self.get_lesson(request)
 
-        print('get', step)
-
-        # Step 1: basic info
         if step == 1:
             form = LessonStep1Form(instance=lesson)
+            return render(request, 'lessons/start_lesson_step.html', {
+                'form': form, 'step': step, 'section': section
+            })
 
-        # Step 2: optional info
         elif step == 2:
             form = LessonStep2Form(instance=lesson)
+            resource_formset = LessonResourceFormSet(instance=lesson)
+            return render(request, 'lessons/start_lesson_step.html', {
+                'form': form,
+                'resource_formset': resource_formset,
+                'step': step,
+                'section': section
+            })
 
-        # Step 3+: student edits
         else:
             students = list(section.students.all())
             index = step - 3
 
             if index >= len(students):
-                # Final step: generate plan and redirect
-                lesson.lesson_plan = f"Lesson Plan for {lesson.name} on {lesson.topic}."
+                lesson.generate_lesson_plan()
                 lesson.save()
                 request.session.pop('lesson_id', None)
-                return redirect('section_detail', pk=section.id)
+                return redirect('lesson_detail', pk=lesson.id)
 
             student = students[index]
             form = StudentForm(instance=student)
 
-        return render(request, f'lessons/start_lesson_step.html', {
-            'form': form,
-            'step': step,
-            'section': section,
-        })
+            return render(request, 'lessons/start_lesson_step.html', {
+                'form': form,
+                'step': step,
+                'section': section,
+                'student': student
+            })
 
     def post(self, request, section_id, step):
         section = self.get_section(request, section_id)
         step = int(step)
         lesson = self.get_lesson(request)
-
-        print('post', step)
 
         if step == 1:
             form = LessonStep1Form(request.POST, instance=lesson)
@@ -304,23 +307,35 @@ class StartLessonWizardView(LoginRequiredMixin, View):
 
         elif step == 2:
             form = LessonStep2Form(request.POST, instance=lesson)
-            if form.is_valid():
+            resource_formset = LessonResourceFormSet(request.POST, request.FILES, instance=lesson)
+
+            if form.is_valid() and resource_formset.is_valid():
                 form.save()
+                resource_formset.save()
                 return redirect('start_lesson', section_id=section.id, step=3)
+
+            return render(request, 'lessons/start_lesson_step.html', {
+                'form': form,
+                'resource_formset': resource_formset,
+                'step': step,
+                'section': section
+            })
 
         else:
             students = list(section.students.all())
             index = step - 3
+
             if index >= len(students):
                 return redirect('start_lesson', section_id=section.id, step=step + 1)
 
             student = students[index]
             form = StudentForm(request.POST, instance=student)
+
             if form.is_valid():
                 form.save()
                 return redirect('start_lesson', section_id=section.id, step=step + 1)
 
-        return render(request, f'lessons/start_lesson_step.html', {
+        return render(request, 'lessons/start_lesson_step.html', {
             'form': form,
             'step': step,
             'section': section,

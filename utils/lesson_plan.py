@@ -1,4 +1,7 @@
+#from rag.pipeline import RAGPipeline
 from .AI import AI
+from django.conf import settings
+
 
 class LessonPlanHelper(AI):
 
@@ -90,7 +93,6 @@ Create a detailed lesson plan for Session {session_number} that includes:
    - Assignment of any homework
 
 ### Constraints:
-
 - Ensure alignment with the overall syllabus
 - Make activities engaging and interactive
 - Include clear time allocations
@@ -101,9 +103,12 @@ Create a detailed lesson plan for Session {session_number} that includes:
 - Ensure smooth transitions between activities
 """
 
+        #response = self.pipeline.run(prompt)
         response = self.ask(prompt)
+        print(response)
 
         # Validate response and ensure correct output format
         if response:
             return response
-        return None  # Return None if response is invalid 
+        print("fail")
+        return None  # Return None if response is invalid

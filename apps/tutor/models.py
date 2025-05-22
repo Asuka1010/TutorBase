@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from utils.syllabus import SyllabusHelper
 from utils.lesson_plan import LessonPlanHelper
+from utils.lesson_plan import LessonPlanHelper
 
 
 class Student(models.Model):
@@ -9,7 +10,7 @@ class Student(models.Model):
     name = models.CharField(max_length=300)
     language = models.CharField(max_length=300, null=True, blank=True)
     country = models.CharField(max_length=300, verbose_name="Country of Residence", null=True, blank=True)
-    goals = models.TextField(null=True, blank=True, verbose_name="Goal & Expectations for Tutors")
+    goals = models.TextField(null=True, blank=True, verbose_name="Goal & Expectations")
     personality = models.TextField(null=True, blank=True)
     interests = models.TextField(null=True, blank=True)
     hobbies = models.TextField(null=True, blank=True)
@@ -87,14 +88,26 @@ class Lesson(models.Model):
         lessons = list(section.lessons.order_by('date'))
         session_number = lessons.index(self) + 1 if self in lessons else 1
 
-        # 1. 요약 텍스트(lesson info) 먼저 저장
         self.lesson_plan = f"""📘 Lesson Plan for {self.name}
         📅 Date: {self.date.strftime('%B %d, %Y at %I:%M %p')}
         🎓 Topic: {self.topic}
         🎯 Grade Level: {self.grade_level}
         ⏱️ Duration: {self.duration} minutes
         """
-        # 2. LLM 결과로 덮어쓰기
         lesson_plan_helper = LessonPlanHelper()
         self.lesson_plan = lesson_plan_helper.generate(section, session_number, syllabus_content)
+        print(self.lesson_plan)
         self.save()
+
+
+class Resource(models.Model):
+    section = models.ForeignKey('Section', on_delete=models.CASCADE, null=True, blank=True)
+    lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE, null=True, blank=True)
+
+    name = models.CharField(max_length=1000)
+    url = models.URLField(null=True, blank=True)
+    file = models.FileField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name

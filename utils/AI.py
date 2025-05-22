@@ -30,21 +30,30 @@ class AI:
             KeyError: If the expected format is not found in the response.
         """
         print("chatgpt")
-        client = OpenAI(
-            api_key=settings.OPENROUTER_API,
-            base_url="https://openrouter.ai/api/v1",
-        )  # Initialize OpenAI client
+        chatgpt = False
+
+        if chatgpt:
+            client = OpenAI(
+                api_key=settings.OPEN_AI,
+            )
+            chat_model = "gpt-4o-mini"
+
+        else:
+            client = OpenAI(
+                api_key=settings.OPENROUTER_API,
+                base_url="https://openrouter.ai/api/v1",
+            )  # Initialize OpenAI client
+            chat_model = "deepseek/deepseek-chat-v3-0324:free"
 
         # print(prompt)  # Debug: Print the input prompt
 
         # Make the API call
         completion = client.chat.completions.create(
-            #model="gpt-4o-mini",  # Adjust model if needed
+            model=chat_model,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant for helping tutors generate lesson plans."},
+                {"role": "system", "content": "You are a helpful assistant for helping teachers generate lesson plans."},
                 {"role": "user", "content": prompt}
             ],
-            model="deepseek/deepseek-chat-v3-0324:free",
             stream=False
         )
 

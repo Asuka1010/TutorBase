@@ -6,7 +6,6 @@
 <!-- Section info + student selection -->
 <form method="post">
   {% csrf_token %}
-  <h4>Student Characteristics</h4>
   {{ form.student_characteristics|as_crispy_field }}
 
   <h4 class="mt-4">Select Students</h4>
