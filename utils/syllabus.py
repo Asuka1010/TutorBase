@@ -15,7 +15,7 @@ class SyllabusHelper(AI):
 
     def generate(self, section):
         """
-        Generate a personalized curriculum syllabus for student.
+        Generate a personalized curriculum syllabus for private tutor.
 
         Args:
             section: The section object containing course and student information.
@@ -24,7 +24,7 @@ class SyllabusHelper(AI):
             str or None: Generated syllabus text, or None if generation failed.
         """
         prompt = f"""
-You are an expert teacher and curriculum designer. You are creating a personalized curriculum syllabus for neurodivergent students (ADHD, Autism, Dyslexia, Dyspraxia, etc.)
+You are an expert teacher and curriculum designer. You are creating a personalized curriculum syllabus
 
 Please create a personalized curriculum syllabus for teaching on the subject of:  
 {section.theme}
