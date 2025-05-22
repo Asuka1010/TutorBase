@@ -15,7 +15,7 @@ class SyllabusHelper(AI):
 
     def generate(self, section):
         """
-        Generate a personalized curriculum syllabus for neurodivergent students(e.g. ADHD, autism, etc).
+        Generate a personalized curriculum syllabus for student.
 
         Args:
             section: The section object containing course and student information.

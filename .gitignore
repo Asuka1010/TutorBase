@@ -11,10 +11,7 @@ rag/vectorDB
 tutorbase/bin
 tutorbase/lib
 tutorbase/pyvenv.cfg
-<<<<<<< HEAD
 tests/
 tutorbase/share/
 utils/rag_lesson_plan.py
 utils/rag_syllabus.py
-=======
->>>>>>> 5bbfc127bab0e8fbab195ff0778f8cb3340bd536
