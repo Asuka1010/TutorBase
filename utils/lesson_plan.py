@@ -44,6 +44,9 @@ Here is the course syllabus for reference:
 {syllabus_content}
 
 ### Your Task:
+Please follow the instructions below and write your response in **plain text only**.
+Do not use markdown formatting like asterisks (**), hashtags (#), or heading styles. 
+You may use numbered lists (1., 2., etc.) and dashes (-) to organize your response.
 
 Create a detailed lesson plan for Session {session_number} that includes:
 
